@@ -1,0 +1,77 @@
+[tool.poetry]
+name = "query_perturbation"
+version = "0.0.1"
+description = "A short description of query_perturbation."
+authors = ["Naoya Sogi <naoya-sogi@nec.com>"]
+readme = "README.md"
+packages = [{ include = "query_perturbation", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+
+torch = [
+  { version = "2.1.1+cu118", markers = "sys_platform == 'linux'", source = "pytorch-cu118" },
+  { version = "2.1.1", markers = "sys_platform != 'linux'", source = "pypi" },
+]
+numpy = "1.24.3"
+scipy = "1.10.1"
+
+torchvision = [
+  { version = "0.16.1+cu118", markers = "sys_platform == 'linux'", source = "pytorch-cu118" },
+  { version = "0.16.1", markers = "sys_platform != 'linux'", source = "pypi" },
+]
+salesforce-lavis = "^1.0.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest-cov = "^3.0.0"
+black = "^23.3.0"
+isort = "^5.11.4"
+flake8 = "^6.1.0"
+mypy = "^1.5.1"
+mdformat-gfm = "^0.3.5"
+mdformat_frontmatter = "^0.4.1"
+mdformat_footnote = "^0.1.1"
+
+[[tool.poetry.source]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+priority = "explicit"
+
+[tool.black]
+line-length = 85
+
+[tool.isort]
+profile = "black"
+line_length = 85
+
+[tool.mypy]
+python_version = "3.10"
+# following setting is same as pysen
+# https://github.com/pfnet/pysen/blob/main/setup.cfg#L12
+check_untyped_defs = true
+disallow_any_decorated = false
+disallow_any_generics = false
+disallow_any_unimported = false
+disallow_incomplete_defs = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = false
+disallow_untyped_defs = true
+ignore_errors = false
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+strict_equality = true
+strict_optional = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+exclude = ["^data*"]
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
